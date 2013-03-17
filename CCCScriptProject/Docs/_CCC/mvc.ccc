@@ -1,0 +1,43 @@
+$!
+	T["output0"] = "SCRIPT";
+
+	var result1 = "";
+	var result2 = "";
+
+	@!TABLE
+	<table>
+		TR
+	</table>!@
+
+	@!TR
+	<tr>TD</tr>!@
+
+	@!TD
+	<td>ITEM</td>!@
+
+	var tr = "";
+	foreach(var f in File.ReadAllLines("_data.txt")){	   
+		var td = "";
+	    var sp = f.Split('|');
+		foreach(var p in sp){
+			td += TD.R("ITEM", p);
+		}
+		tr += TR.R("TD",td); 
+	}
+
+	var tb = TABLE.R("TR",tr);
+	result1 = tb;	
+!$
+$0~
+	@*region SCRIPT*@
+		$!=result1 + Environment.NewLine!$
+	@*endregion*@
+~0$
+
+$~~
+var page = "../Views/Home/Index.cshtml";
+Region(page,"SCRIPT", "SCRIPT","\\@\\*", "\\*\\@");
+var scriptFileName = new System.IO.FileInfo( Environment.GetCommandLineArgs()[1]).Name;
+MessageBox.Show(scriptFileName);
+~~$
+

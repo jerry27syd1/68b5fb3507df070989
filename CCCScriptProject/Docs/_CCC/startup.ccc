@@ -1,0 +1,47 @@
+﻿$!
+	T["output0"] = "Test";
+	T["output1"] = "ControlNames";
+	#using
+	#endusing
+	#dll
+	#enddll
+	#class
+	#endclass
+	#method
+	#endmethod
+	
+	var result1 = "";
+	var result2 = "";
+
+	@!r1
+	Console.WriteLine("Text");!@
+
+	@!r2
+	Control.WriteLine("test");!@
+
+	foreach(var f in File.ReadAllLines("_data.txt")){
+	    var sp = f.Split('|');
+		result1 += r1.R("Text",sp[0]).R("text",sp[1]);
+	}
+
+	
+!$
+$0~
+	#region Test
+		$!=result1 + Environment.NewLine!$
+	#endregion
+~0$
+
+$1~
+	#region ControlNames
+		$!=result2 + Environment.NewLine!$
+	#endregion
+~1$
+
+$~~
+Region("../WebForm1.aspx.cs","Test", "Test");
+//Region("../WebForm1.aspx.cs","ControlNames", "ControlNames");
+//var scriptFileName = new System.IO.FileInfo( Environment.GetCommandLineArgs()[1]).Name;
+//MessageBox.Show(scriptFileName);
+~~$
+
